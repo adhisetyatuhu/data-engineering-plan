@@ -2,6 +2,7 @@
 title: Home
 layout: home
 nav_order: 1
+permalink: /
 ---
 
 # Roadmap Belajar: Data Engineering Fundamentals (8 Minggu)
