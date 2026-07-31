@@ -3,3 +3,7 @@ $content-width: 90rem;
 
 // Ganti warna link/sidebar dari ungu default tema ke slate (abu kebiruan gelap)
 $link-color: #334155;
+
+// Submenu (nav-child-link) pakai slate lebih terang, biar hierarki menu vs
+// submenu kelihatan jelas tapi tetap satu keluarga warna dengan menu utama
+$nav-child-link-color: #64748b;
