@@ -18,3 +18,12 @@
     max-width: none;
   }
 }
+
+// Beri background berbeda untuk submenu (nav-list bersarang di dalam
+// nav-list-item), supaya hierarki menu vs submenu makin jelas selain
+// dari perbedaan warna teks ($link-color vs $nav-child-link-color)
+.nav-list .nav-list-item .nav-list {
+  background-color: #f1f5f9;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
