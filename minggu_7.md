@@ -1,3 +1,8 @@
+---
+title: Minggu 7 - Containerization
+nav_order: 8
+---
+
 # Minggu 7 — Containerization
 
 ## Breakdown Harian (±15-20 jam)

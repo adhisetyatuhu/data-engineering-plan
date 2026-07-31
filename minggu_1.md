@@ -1,3 +1,9 @@
+---
+title: Minggu 1 - SQL Fundamentals
+nav_order: 2
+has_children: true
+---
+
 # Minggu 1 — SQL Fundamentals
 
 ## Breakdown Harian (±18 jam)

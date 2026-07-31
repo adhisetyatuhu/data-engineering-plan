@@ -1,3 +1,8 @@
+---
+title: Minggu 8 - NoSQL & Storage Strategy (Capstone)
+nav_order: 9
+---
+
 # Minggu 8 — NoSQL & Storage Strategy (Capstone)
 
 ## Breakdown Harian (±15-20 jam)

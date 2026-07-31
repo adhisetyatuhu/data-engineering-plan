@@ -1,3 +1,8 @@
+---
+title: Minggu 4 - Data Quality, Orchestration & Streaming
+nav_order: 5
+---
+
 # Minggu 4 — Lanjutan Pipeline: Data Quality, Orchestration Lanjutan, Streaming Intro
 
 ## Breakdown Harian (±18 jam)

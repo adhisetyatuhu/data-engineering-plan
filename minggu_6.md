@@ -1,3 +1,8 @@
+---
+title: Minggu 6 - Cloud Platform Fundamentals
+nav_order: 7
+---
+
 # Minggu 6 — Cloud Platform Fundamentals
 
 ## Pilih 1 Provider Dulu

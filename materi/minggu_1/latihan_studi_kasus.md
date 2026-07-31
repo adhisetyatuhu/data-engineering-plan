@@ -1,3 +1,9 @@
+---
+title: Studi Kasus & Mini Project
+parent: Minggu 1 - SQL Fundamentals
+nav_order: 7
+---
+
 # Sabtu–Minggu — Studi Kasus, Mini Project Pemanasan, & Dasar Query Optimization
 
 *Sabtu 4 jam + Minggu 4 jam. Dataset & setup: lihat `00_overview.md`.*

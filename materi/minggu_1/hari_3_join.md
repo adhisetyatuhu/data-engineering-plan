@@ -1,3 +1,9 @@
+---
+title: Hari 3 - JOIN
+parent: Minggu 1 - SQL Fundamentals
+nav_order: 4
+---
+
 # Hari 3 — JOIN (INNER, LEFT, RIGHT, FULL)
 
 *Rabu, 2 jam — bagian paling krusial minggu ini. Dataset & setup: lihat `00_overview.md`.*

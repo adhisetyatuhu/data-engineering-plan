@@ -1,0 +1,16 @@
+title: Roadmap Data Engineering
+description: Roadmap belajar Data Engineering 8 minggu — SQL, Python, big data pipeline, governance, cloud, containerization, NoSQL
+remote_theme: just-the-docs/just-the-docs
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-readme-index
+
+color_scheme: light
+search_enabled: true
+nav_sort: case_insensitive
+heading_anchors: true
+
+aux_links:
+  "Repo di GitHub":
+    - "https://github.com/adhisetyatuhu/data-engineering-plan"

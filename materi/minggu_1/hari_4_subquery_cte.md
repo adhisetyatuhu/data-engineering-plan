@@ -1,3 +1,9 @@
+---
+title: Hari 4 - Subquery & CTE
+parent: Minggu 1 - SQL Fundamentals
+nav_order: 5
+---
+
 # Hari 4 — Subquery & CTE (WITH clause)
 
 *Kamis, 2 jam. Dataset & setup: lihat `00_overview.md`.*

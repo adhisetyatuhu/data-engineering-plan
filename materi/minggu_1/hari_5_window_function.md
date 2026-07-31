@@ -1,3 +1,9 @@
+---
+title: Hari 5 - Window Functions
+parent: Minggu 1 - SQL Fundamentals
+nav_order: 6
+---
+
 # Hari 5 — Window Functions (ROW_NUMBER, RANK, LAG/LEAD)
 
 *Jumat, 2 jam. Dataset & setup: lihat `00_overview.md`.*

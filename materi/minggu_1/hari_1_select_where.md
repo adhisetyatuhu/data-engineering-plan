@@ -1,3 +1,9 @@
+---
+title: Hari 1 - SELECT, WHERE, ORDER BY, LIMIT
+parent: Minggu 1 - SQL Fundamentals
+nav_order: 2
+---
+
 # Hari 1 — Konsep Database Relasional, SELECT, WHERE, ORDER BY, LIMIT
 
 *Senin, 2 jam. Dataset & setup: lihat `00_overview.md`.*

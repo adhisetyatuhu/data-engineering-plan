@@ -1,3 +1,9 @@
+---
+title: Hari 2 - Agregasi & GROUP BY
+parent: Minggu 1 - SQL Fundamentals
+nav_order: 3
+---
+
 # Hari 2 — Fungsi Agregasi (COUNT, SUM, AVG), GROUP BY, HAVING
 
 *Selasa, 2 jam. Dataset & setup: lihat `00_overview.md`.*

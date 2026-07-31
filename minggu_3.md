@@ -1,3 +1,8 @@
+---
+title: Minggu 3 - Arsitektur Data & Big Data Pipeline
+nav_order: 4
+---
+
 # Minggu 3 — Arsitektur Data & Big Data Pipeline (Dasar)
 
 ## Breakdown Harian (±18 jam)

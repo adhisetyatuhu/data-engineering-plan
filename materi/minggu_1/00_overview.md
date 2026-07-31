@@ -1,3 +1,9 @@
+---
+title: Overview
+parent: Minggu 1 - SQL Fundamentals
+nav_order: 1
+---
+
 # Modul Minggu 1 — SQL Fundamentals (untuk Software Developer)
 
 > Materi ajar ini adalah pendamping `minggu_1.md` (jadwal & outline). File ini berisi konten pengajaran lengkap: penjelasan konsep, analogi ke dunia software development, contoh query, latihan, dan kunci jawaban — siap dipakai untuk sesi mengajar (live coding) atau belajar mandiri.
@@ -136,7 +142,16 @@ INSERT INTO order_items VALUES
 (19, 12, 6, 4, 8.00);
 ```
 
-7 customer (satu di antaranya, **Hassan Ali**, belum pernah bikin order sama sekali), 7 produk (satu di antaranya, **Desk Lamp**, belum pernah terjual), 12 order (termasuk 1 `cancelled` dan 1 `refunded` — sengaja, buat latihan filtering & data quality), 19 baris `order_items`. Customer/produk yang "kosong" itu sengaja ditaruh — nanti jadi bahan utama latihan `LEFT`/`RIGHT`/`FULL JOIN` di Hari 3 (baris yang cuma muncul di satu sisi JOIN). Dataset ini cukup kecil untuk dihitung manual saat verifikasi jawaban, cukup besar untuk hasil JOIN/GROUP BY/window function yang bermakna.
+**Ringkasan isi dataset:**
+
+- **7 customer** — satu di antaranya, **Hassan Ali**, belum pernah bikin order sama sekali
+- **7 produk** — satu di antaranya, **Desk Lamp**, belum pernah terjual
+- **12 order** — termasuk 1 `cancelled` dan 1 `refunded` (sengaja, buat latihan filtering & data quality)
+- **19 baris** `order_items`
+
+Customer dan produk yang "kosong" itu sengaja ditaruh — nanti jadi bahan utama latihan `LEFT`/`RIGHT`/`FULL JOIN` di Hari 3, karena baris seperti ini cuma muncul di satu sisi JOIN.
+
+Ukurannya sengaja dijaga pas: cukup kecil untuk dihitung manual saat verifikasi jawaban, tapi cukup besar untuk menghasilkan JOIN/GROUP BY/window function yang bermakna.
 
 ## Struktur Modul
 

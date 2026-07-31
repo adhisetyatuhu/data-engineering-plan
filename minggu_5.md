@@ -1,3 +1,8 @@
+---
+title: Minggu 5 - Data Governance
+nav_order: 6
+---
+
 # Minggu 5 — Data Governance
 
 ## Breakdown Harian (±10-15 jam materi, slack tersedia untuk buffer)

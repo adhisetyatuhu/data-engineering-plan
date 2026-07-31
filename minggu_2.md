@@ -1,3 +1,9 @@
+---
+title: Minggu 2 - Python Fundamentals
+nav_order: 3
+has_children: true
+---
+
 # Minggu 2 — Python Fundamentals + Mini Project SQL & Python
 
 ## Breakdown Harian (±18 jam)
