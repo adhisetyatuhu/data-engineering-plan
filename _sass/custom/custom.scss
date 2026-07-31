@@ -1,0 +1,20 @@
+// Sidebar rapat ke kiri (bukan ikut mengambang di tengah), dan
+// konten utama mengisi sisa lebar layar sepenuhnya, bukan terpusat
+// dengan margin kosong di kanan-kiri.
+.side-bar {
+  @include mq(lg) {
+    width: $nav-width;
+  }
+
+  & + .main {
+    @include mq(lg) {
+      margin-left: $nav-width;
+    }
+  }
+}
+
+.main {
+  @include mq(md) {
+    max-width: none;
+  }
+}
