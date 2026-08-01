@@ -243,31 +243,19 @@ python nosql/redis_cache_layer.py
 
 ### Tahap 3: `STORAGE_STRATEGY.md` (±2 jam)
 
-Dokumen sintesis dari `hari_5_storage_strategy.md` — ini yang menyatukan **seluruh** keputusan arsitektur 8 minggu jadi 1 narasi koheren:
+Dokumen sintesis dari `hari_5_storage_strategy.md` — ini yang menyatukan **seluruh** keputusan arsitektur 8 minggu jadi 1 narasi koheren.
 
-```markdown
+**Ilustrasi referensi** untuk section "Diagram Polyglot Architecture" di bawah (bukan file yang perlu disimpan di tahap ini — diagram gabungan **final** `diagrams/polyglot_architecture.png` baru dibuat di Tahap 4, lihat catatan di bawah):
+
+![Diagram Polyglot Architecture](../../assets/images/minggu_8/polyglot_architecture.svg)
+
 # Storage Strategy — ecommerce-etl-pipeline
 
 ## Diagram Polyglot Architecture
 
-[Raw data] --> GCS (data lake, Minggu 6)
-                 |
-                 v
-         Spark transform (Minggu 3)
-                 |
-                 v
-    +------------+------------+
-    |                         |
-PostgreSQL / BigQuery    MongoDB (Minggu 8)
-(fact_sales, dim_*)      (products, atribut fleksibel)
-- analitik historis       - katalog produk
-- source of truth              |
-    |                          v
-    v                    Redis (Minggu 8)
-Query mahal (RFM,        (cache hasil query,
-top produk)               TTL 1 jam)
-    |
-    +---> di-cache di Redis juga
+[Lihat ilustrasi referensi di atas. Alur: Raw data -> GCS (data lake) -> Spark
+transform -> bercabang ke PostgreSQL/BigQuery (source of truth analitik) & MongoDB
+(katalog fleksibel) -> query mahal (RFM, top produk) di-cache di Redis (TTL 1 jam).]
 
 ## Tabel Keputusan
 
@@ -284,7 +272,6 @@ tetap jadi **source of truth** (dihasilkan pipeline utama, `build_star_schema.py
 MongoDB adalah proyeksi turunan yang diperkaya kategori, disinkronkan lewat
 `nosql/mongo_migration.py` (idealnya dijalankan berkala, bukan sekali manual --
 di luar scope wajib mini project ini, tapi didokumentasikan sebagai limitasi yang disadari).
-```
 
 Isi lengkap dengan penjelasan bergaya `hari_5_storage_strategy.md` — jangan cuma tabel kosong, sertakan alasan naratif untuk tiap baris.
 
@@ -292,7 +279,7 @@ Isi lengkap dengan penjelasan bergaya `hari_5_storage_strategy.md` — jangan cu
 
 Section baru **"Project Journey"** di `README.md`:
 
-```markdown
+
 ## Project Journey (8 Minggu)
 
 | Minggu | Fokus | Yang Ditambahkan |
@@ -304,7 +291,7 @@ Section baru **"Project Journey"** di `README.md`:
 | 6 | Cloud migration | GCS (data lake), BigQuery (data warehouse), IAM |
 | 7 | Containerization | Custom Docker images, Kubernetes (1 komponen) |
 | 8 | Polyglot storage | MongoDB (katalog fleksibel), Redis (caching), STORAGE_STRATEGY.md |
-```
+
 
 Diagram arsitektur final (`diagrams/polyglot_architecture.png`) — gabungkan **semua** komponen jadi 1 gambar: raw data → GCS → Spark → star schema (Postgres/BigQuery) → MongoDB/Redis → Airflow mengorkestrasi semuanya → Great Expectations menjaga kualitas → OpenMetadata mendokumentasikan → Docker/K8s menjalankan semuanya.
 

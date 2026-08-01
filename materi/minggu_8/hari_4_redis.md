@@ -58,26 +58,7 @@ cached = json.loads(r.get("cache:top_10_products"))
 
 Ini pola **paling umum** dipakai untuk caching, dan yang akan diterapkan langsung di mini project Minggu:
 
-```
-                    ┌─────────────┐
-   Request  ──────> │ Cek Redis    │
-                     │ (cache)      │
-                     └──────┬──────┘
-                            │
-              ┌─────────────┴─────────────┐
-              │                           │
-        Cache HIT                    Cache MISS
-        (data ada)                   (data tidak ada/expired)
-              │                           │
-      Return dari Redis          Query ke sumber data asli
-      (CEPAT)                    (PostgreSQL/BigQuery/MongoDB)
-              │                           │
-              │                    Simpan hasil ke Redis (dengan TTL)
-              │                           │
-              └─────────────┬─────────────┘
-                             │
-                        Return ke user
-```
+![Pola Cache-Aside](../../assets/images/minggu_8/cache_aside.svg)
 
 ```python
 def get_top_10_products(engine, r: redis.Redis):

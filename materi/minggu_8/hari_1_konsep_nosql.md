@@ -49,24 +49,7 @@ Untuk sistem database **terdistribusi** (data tersebar di banyak mesin — relev
 - **A — Availability**: setiap request selalu mendapat **respons** (tidak error/timeout), walau mungkin datanya tidak 100% terbaru.
 - **P — Partition Tolerance**: sistem tetap berfungsi meski ada gangguan komunikasi antar node (network partition).
 
-```
-        Consistency
-           / \
-          /   \
-         / CP  \        CP: konsisten & tahan partisi,
-        /-------\       TAPI availability terkorbankan
-       /   CA    \       saat partisi terjadi (jarang
-      / (teoritis, \      dipilih murni utk sistem
-     /  jarang di   \     terdistribusi asli)
-    /  praktik nyata) \
-   /---------------------\
-  Availability      Partition Tolerance
-              \      /
-               \ AP /   AP: selalu tersedia & tahan
-                \  /    partisi, TAPI ada risiko baca
-                 \/     data yang belum ter-sinkron
-                        (eventual consistency)
-```
+![CAP Theorem: Consistency, Availability, Partition Tolerance](../../assets/images/minggu_8/cap_theorem.svg)
 
 **Kenapa cuma "2 dari 3", bukan pilih bebas ketiganya**: dalam sistem terdistribusi nyata, **network partition pasti bisa terjadi** (jaringan antar server bukan sesuatu yang 100% bisa dijamin selalu sempurna) — jadi **P** praktis selalu harus diasumsikan bisa terjadi. Pertanyaan sesungguhnya bukan "pilih 2 dari 3", tapi: **saat partition benar-benar terjadi, sistem memilih tetap Consistent (menolak melayani request yang datanya berisiko basi) atau tetap Available (tetap melayani, walau ada risiko data yang dibaca belum sepenuhnya ter-sinkron)?**
 

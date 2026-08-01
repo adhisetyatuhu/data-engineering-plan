@@ -25,20 +25,7 @@ Peserta sudah menjalankan puluhan `docker run`/`docker compose up` sejak Minggu 
 
 Perbedaan paling fundamental: **apa yang di-virtualisasi**.
 
-```
-Virtual Machine                        Container
-┌─────────────────────────┐            ┌─────────────────────────┐
-│  App A   │  App B        │            │  App A   │  App B        │
-│  Bins/Libs │ Bins/Libs    │            │  Bins/Libs │ Bins/Libs    │
-│  Guest OS  │ Guest OS      │            ├─────────────────────────┤
-├─────────────────────────┤            │      Docker Engine       │
-│      Hypervisor          │            ├─────────────────────────┤
-├─────────────────────────┤            │      Host OS (kernel)    │
-│      Host OS              │            ├─────────────────────────┤
-├─────────────────────────┤            │      Infrastruktur fisik │
-│      Infrastruktur fisik  │            └─────────────────────────┘
-└─────────────────────────┘
-```
+![Container vs Virtual Machine — apa yang di-virtualisasi](../../assets/images/minggu_7/vm_vs_container.svg)
 
 - **VM**: tiap VM punya **guest OS lengkap sendiri** (kernel sendiri) di atas hypervisor — isolasinya sangat kuat (level hardware-tervirtualisasi), tapi berat: tiap VM makan gigabytes disk, butuh menit untuk boot, overhead resource signifikan cuma untuk menjalankan OS-nya sendiri.
 - **Container**: semua container di 1 mesin **berbagi kernel host OS yang sama** — yang diisolasi cuma proses, filesystem, dan network di level OS (lewat fitur Linux kernel: `namespaces` dan `cgroups`). Container cuma berisi aplikasi + library yang dibutuhkan, bukan OS lengkap — makanya ukurannya megabytes (bukan gigabytes) dan start dalam hitungan **detik**, bukan menit.
@@ -71,16 +58,7 @@ docker ps -a           # daftar container, termasuk yang sudah berhenti (instanc
 
 ### Docker Architecture
 
-```
-┌──────────────┐   perintah    ┌──────────────────┐   pull/push   ┌─────────────────┐
-│ Docker Client │ ───────────> │  Docker Daemon     │ <───────────> │  Registry         │
-│ (CLI: `docker`)│               │  (dockerd)         │               │  (Docker Hub, dll) │
-└──────────────┘               │  - build image     │               └─────────────────┘
-                                │  - jalankan container│
-                                │  - kelola network/  │
-                                │    volume            │
-                                └──────────────────┘
-```
+![Docker Architecture: Client, Daemon, Registry](../../assets/images/minggu_7/docker_architecture.svg)
 
 - **Docker Client** — CLI (`docker`, `docker compose`) yang dipakai peserta selama ini, cuma **mengirim perintah** ke daemon.
 - **Docker Daemon (`dockerd`)** — proses background yang **benar-benar** melakukan pekerjaan: build image, jalankan/hentikan container, kelola network & volume. Ini sebabnya Docker Desktop harus **menyala** (daemon aktif) sebelum perintah `docker` apapun bisa jalan — error "Cannot connect to the Docker daemon" yang sering muncul kalau Docker Desktop belum dibuka, sekarang jelas kenapa.

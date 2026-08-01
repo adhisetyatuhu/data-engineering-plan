@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <style>
+    .title    { font-size: 22px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 14px; fill: #6B7280; }
+    .boxtitle { font-size: 15px; font-weight: 700; }
+    .boxsub   { font-size: 11px; }
+    .bullet   { font-size: 12px; }
+    .note     { font-size: 11px; font-style: italic; fill: #6B7280; }
+    .arrlabel { font-size: 12px; font-weight: 700; fill: #374151; }
+    .arrsub   { font-size: 10.5px; fill: #6B7280; }
+    .foot     { font-size: 12px; fill: #6B7280; }
+  </style>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#374151"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="340" fill="#FFFFFF"/>
+
+  <text x="450" y="28" text-anchor="middle" class="title">Docker Architecture: Client, Daemon, Registry</text>
+  <text x="450" y="48" text-anchor="middle" class="subtitle">Ilustrasi arsitektur — Minggu 7, Hari 1</text>
+
+  <!-- Docker Client -->
+  <rect x="40" y="110" width="220" height="140" rx="8" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2"/>
+  <text x="150" y="145" text-anchor="middle" class="boxtitle" fill="#1E3A8A">Docker Client</text>
+  <text x="150" y="165" text-anchor="middle" class="boxsub" fill="#1E3A8A">CLI: docker / docker compose</text>
+  <line x1="55" y1="178" x2="245" y2="178" stroke="#93C5FD" stroke-width="1.5"/>
+  <text x="55" y="200" class="bullet" fill="#1E3A8A">• Mengirim perintah ke daemon</text>
+  <text x="55" y="222" class="bullet" fill="#1E3A8A">• Tidak mengeksekusi apapun</text>
+
+  <!-- Docker Daemon -->
+  <rect x="340" y="80" width="260" height="200" rx="8" fill="#FDE68A" stroke="#D97706" stroke-width="2.5"/>
+  <text x="470" y="115" text-anchor="middle" class="boxtitle" fill="#78350F">Docker Daemon (dockerd)</text>
+  <text x="470" y="135" text-anchor="middle" class="boxsub" fill="#78350F">proses background — yang benar-benar bekerja</text>
+  <line x1="355" y1="148" x2="585" y2="148" stroke="#FCD34D" stroke-width="1.5"/>
+  <text x="355" y="170" class="bullet" fill="#78350F">• Build image</text>
+  <text x="355" y="192" class="bullet" fill="#78350F">• Jalankan / hentikan container</text>
+  <text x="355" y="214" class="bullet" fill="#78350F">• Kelola network &amp; volume</text>
+  <text x="355" y="250" class="note">Harus aktif (Docker Desktop ON)</text>
+
+  <!-- Registry -->
+  <rect x="680" y="110" width="180" height="140" rx="8" fill="#D1FAE5" stroke="#10B981" stroke-width="2"/>
+  <text x="770" y="145" text-anchor="middle" class="boxtitle" fill="#065F46">Registry</text>
+  <text x="770" y="165" text-anchor="middle" class="boxsub" fill="#065F46">Docker Hub, dll</text>
+  <line x1="695" y1="178" x2="845" y2="178" stroke="#6EE7B7" stroke-width="1.5"/>
+  <text x="695" y="200" class="bullet" fill="#065F46">• Simpan &amp; distribusi</text>
+  <text x="695" y="220" class="bullet" fill="#065F46">  image (publik/privat)</text>
+
+  <!-- Arrow: Client -> Daemon -->
+  <line x1="260" y1="180" x2="340" y2="180" stroke="#374151" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="300" y="160" text-anchor="middle" class="arrlabel">perintah</text>
+  <text x="300" y="205" text-anchor="middle" class="arrsub">(docker run/</text>
+  <text x="300" y="218" text-anchor="middle" class="arrsub">build/...)</text>
+
+  <!-- Arrow: Daemon <-> Registry -->
+  <line x1="602" y1="180" x2="678" y2="180" stroke="#374151" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="640" y="160" text-anchor="middle" class="arrlabel">pull / push</text>
+  <text x="640" y="205" text-anchor="middle" class="arrsub">(image)</text>
+
+  <text x="450" y="312" text-anchor="middle" class="foot">Client = pengirim perintah  •  Daemon = eksekutor nyata  •  Registry = penyimpanan &amp; distribusi image</text>
+</svg>

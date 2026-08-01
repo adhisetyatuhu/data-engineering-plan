@@ -58,16 +58,7 @@ volumes:
 
 Default, Docker membuat **bridge network** untuk container yang perlu saling terhubung dalam 1 host — ini yang sudah dibahas mekanismenya di `hari_3_docker_compose.md` (Compose otomatis membuat 1 bridge network per project, service saling terhubung lewat nama).
 
-```
-Tanpa network khusus (docker run polos)     Dengan Compose (1 bridge network otomatis)
-┌──────────┐   ┌──────────┐                 ┌────────────────────────────┐
-│ container │   │ container │                 │  bridge network            │
-│    A      │   │    B      │                 │  ┌────────┐  ┌────────┐   │
-└──────────┘   └──────────┘                 │  │ svc-A  │──│ svc-B  │   │
-  Tidak saling kenal secara default            │  └────────┘  └────────┘   │
-  (perlu docker network connect manual)        └────────────────────────────┘
-                                                 Saling kenal otomatis lewat nama service
-```
+![Docker Networking: Bridge Network](../../assets/images/minggu_7/docker_networking.svg)
 
 **Ini yang menjelaskan kenapa `pg-belajar` (Minggu 1, `docker run` biasa) butuh `host.docker.internal`**: dia tidak berada di bridge network manapun yang sama dengan container Airflow — keduanya "tidak saling kenal" secara default, beda dari service-service di dalam 1 file Compose yang sama yang otomatis satu network.
 

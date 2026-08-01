@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 760" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <style>
+    .title    { font-size: 22px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 14px; fill: #6B7280; }
+    .boxtitle { font-size: 13.5px; font-weight: 700; }
+    .boxsub   { font-size: 10.8px; }
+    .pill     { font-size: 12px; font-weight: 700; }
+    .callout-title { font-size: 13.5px; font-weight: 700; }
+    .callout-body  { font-size: 12px; fill: #1F2937; }
+  </style>
+
+  <defs>
+    <marker id="arrow3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#374151"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="920" height="760" fill="#FFFFFF"/>
+
+  <text x="460" y="28" text-anchor="middle" class="title">Pola Cache-Aside</text>
+  <text x="460" y="48" text-anchor="middle" class="subtitle">Ilustrasi — Minggu 8, Hari 4</text>
+
+  <!-- Request -->
+  <rect x="360" y="85" width="200" height="50" rx="8" fill="#E5E7EB" stroke="#6B7280" stroke-width="2"/>
+  <text x="460" y="107" text-anchor="middle" class="boxtitle" fill="#1F2937">Request</text>
+  <text x="460" y="124" text-anchor="middle" class="boxsub" fill="#1F2937">(client minta data)</text>
+
+  <line x1="460" y1="135" x2="460" y2="169" stroke="#374151" stroke-width="2" marker-end="url(#arrow3)"/>
+
+  <!-- Cek Redis -->
+  <rect x="340" y="170" width="240" height="70" rx="8" fill="#FDE68A" stroke="#D97706" stroke-width="2.5"/>
+  <text x="460" y="200" text-anchor="middle" class="boxtitle" fill="#78350F">Cek Redis (cache)</text>
+  <text x="460" y="220" text-anchor="middle" class="boxsub" fill="#78350F">r.get(cache_key)</text>
+
+  <!-- split arrows -->
+  <line x1="460" y1="240" x2="230" y2="266" stroke="#374151" stroke-width="2" marker-end="url(#arrow3)"/>
+  <line x1="460" y1="240" x2="690" y2="266" stroke="#374151" stroke-width="2" marker-end="url(#arrow3)"/>
+
+  <!-- HIT pill -->
+  <rect x="140" y="270" width="160" height="32" rx="16" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+  <text x="220" y="291" text-anchor="middle" class="pill" fill="#065F46">Cache HIT (data ada)</text>
+
+  <!-- MISS pill -->
+  <rect x="620" y="270" width="160" height="32" rx="16" fill="#FFFFFF" stroke="#D97706" stroke-width="2"/>
+  <text x="700" y="291" text-anchor="middle" class="pill" fill="#78350F">Cache MISS (expired)</text>
+
+  <line x1="220" y1="302" x2="220" y2="319" stroke="#374151" stroke-width="2" marker-end="url(#arrow3)"/>
+  <line x1="700" y1="302" x2="700" y2="319" stroke="#374151" stroke-width="2" marker-end="url(#arrow3)"/>
+
+  <!-- Return dari Redis -->
+  <rect x="120" y="320" width="200" height="80" rx="8" fill="#D1FAE5" stroke="#10B981" stroke-width="2.5"/>
+  <text x="220" y="352" text-anchor="middle" class="boxtitle" fill="#065F46">Return dari Redis</text>
+  <text x="220" y="372" text-anchor="middle" class="boxsub" fill="#065F46">(CEPAT — tidak query ulang)</text>
+
+  <!-- Query ke Sumber Data Asli -->
+  <rect x="600" y="320" width="200" height="80" rx="8" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2.5"/>
+  <text x="700" y="352" text-anchor="middle" class="boxtitle" fill="#1E3A8A">Query Sumber Data Asli</text>
+  <text x="700" y="372" text-anchor="middle" class="boxsub" fill="#1E3A8A">(PostgreSQL/BigQuery/Mongo)</text>
+
+  <line x1="700" y1="400" x2="700" y2="429" stroke="#374151" stroke-width="2" marker-end="url(#arrow3)"/>
+
+  <!-- Simpan Hasil ke Redis -->
+  <rect x="600" y="430" width="200" height="70" rx="8" fill="#FDE68A" stroke="#D97706" stroke-width="2.5"/>
+  <text x="700" y="460" text-anchor="middle" class="boxtitle" fill="#78350F">Simpan Hasil ke Redis</text>
+  <text x="700" y="478" text-anchor="middle" class="boxsub" fill="#78350F">(SET ... dengan TTL)</text>
+
+  <!-- convergence -->
+  <line x1="220" y1="400" x2="430" y2="539" stroke="#374151" stroke-width="2" marker-end="url(#arrow3)"/>
+  <line x1="700" y1="500" x2="490" y2="539" stroke="#374151" stroke-width="2" marker-end="url(#arrow3)"/>
+
+  <!-- Return ke User -->
+  <rect x="360" y="540" width="200" height="55" rx="8" fill="#E5E7EB" stroke="#6B7280" stroke-width="2"/>
+  <text x="460" y="565" text-anchor="middle" class="boxtitle" fill="#1F2937">Return ke User</text>
+  <text x="460" y="582" text-anchor="middle" class="boxsub" fill="#1F2937">(response akhir)</text>
+
+  <!-- Callouts -->
+  <rect x="40" y="625" width="400" height="100" rx="8" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1.5"/>
+  <rect x="40" y="625" width="6" height="100" fill="#10B981"/>
+  <text x="56" y="648" class="callout-title" fill="#065F46">Cache HIT — jalur cepat</text>
+  <text x="56" y="669" class="callout-body">Data ditemukan di Redis, langsung</text>
+  <text x="56" y="687" class="callout-body">dikembalikan tanpa menyentuh sumber data.</text>
+  <text x="56" y="705" class="callout-body">Ini alasan utama cache dipakai.</text>
+
+  <rect x="480" y="625" width="400" height="100" rx="8" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5"/>
+  <rect x="480" y="625" width="6" height="100" fill="#D97706"/>
+  <text x="496" y="648" class="callout-title" fill="#78350F">Cache MISS — jalur lengkap</text>
+  <text x="496" y="669" class="callout-body">Data tidak ada/sudah expired → query ke</text>
+  <text x="496" y="687" class="callout-body">sumber asli, simpan hasilnya ke Redis (TTL)</text>
+  <text x="496" y="705" class="callout-body">supaya request berikutnya jadi HIT.</text>
+</svg>
