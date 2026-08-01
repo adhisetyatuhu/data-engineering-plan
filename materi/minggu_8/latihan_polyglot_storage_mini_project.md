@@ -228,14 +228,15 @@ python nosql/redis_cache_layer.py
 `nosql/benchmark_results.md` — catat angka **aktual** dari laptop kamu sendiri, plus 2-3 kalimat kesimpulan:
 
 # Benchmark: Query Langsung vs Redis Cache
-
-| Query | Cache MISS (query DB) | Cache HIT (dari Redis) | Speedup |
-|---|---|---|---|
-| top_10_products | ...s | ...s | ...x |
-| rfm_summary | ...s | ...s | ...x |
+```markdown
+| Query           | Cache MISS (query DB) | Cache HIT (dari Redis) | Speedup |
+|-----------------|-----------------------|------------------------|---------|
+| top_10_products |          ...s         |          ...s          |   ...x  |
+| rfm_summary     |          ...s         |          ...s          |   ...x  |
 
 ## Kesimpulan
 ...
+```
 
 **Catatan jujur soal skala** (konsisten dengan pola PySpark vs Pandas Minggu 3, BigQuery vs Postgres lokal Minggu 6): untuk data seukuran Online Retail II di `pg-belajar` lokal, query yang di-cache kemungkinan **sudah cukup cepat** bahkan tanpa cache (data muat nyaman, index dasar sudah membantu) — speedup dari Redis akan **terlihat jelas** secara relatif (cache hit hampir selalu jauh lebih cepat dari query database manapun, karena in-memory), tapi dampak absolutnya (berapa detik yang benar-benar dihemat) baru terasa signifikan di skala production dengan volume data & concurrent user yang jauh lebih besar — tulis observasi ini apa adanya di kesimpulan, jangan melebih-lebihkan dampak untuk skala mini project ini.
 
