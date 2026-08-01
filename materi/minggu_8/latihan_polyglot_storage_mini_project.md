@@ -227,14 +227,14 @@ python nosql/redis_cache_layer.py
 
 `nosql/benchmark_results.md` — catat angka **aktual** dari laptop kamu sendiri, plus 2-3 kalimat kesimpulan:
 
-# Benchmark: Query Langsung vs Redis Cache
+#### Benchmark: Query Langsung vs Redis Cache
 ```markdown
 | Query           | Cache MISS (query DB) | Cache HIT (dari Redis) | Speedup |
 |-----------------|-----------------------|------------------------|---------|
 | top_10_products |          ...s         |          ...s          |   ...x  |
 | rfm_summary     |          ...s         |          ...s          |   ...x  |
 
-## Kesimpulan
+Kesimpulan
 ...
 ```
 
@@ -245,9 +245,9 @@ python nosql/redis_cache_layer.py
 Dokumen sintesis dari `hari_5_storage_strategy.md` — ini yang menyatukan **seluruh** keputusan arsitektur 8 minggu jadi 1 narasi koheren.
 
 
-# Storage Strategy — ecommerce-etl-pipeline
+### Storage Strategy — ecommerce-etl-pipeline
 
-## Diagram Polyglot Architecture
+#### Diagram Polyglot Architecture
 
 ![Diagram Polyglot Architecture](../../assets/images/minggu_8/polyglot_architecture.svg)
 
@@ -255,7 +255,7 @@ Lihat ilustrasi referensi di atas. Alur: Raw data -> GCS (data lake) -> Spark
 transform -> bercabang ke PostgreSQL/BigQuery (source of truth analitik) & MongoDB
 (katalog fleksibel) -> query mahal (RFM, top produk) di-cache di Redis (TTL 1 jam).
 
-## Tabel Keputusan
+#### Tabel Keputusan
 
 | Data | Disimpan di | Kenapa | Kenapa BUKAN alternatif lain |
 |---|---|---|---|
@@ -264,7 +264,7 @@ transform -> bercabang ke PostgreSQL/BigQuery (source of truth analitik) & Mongo
 | dim_product (katalog) | MongoDB | Atribut bervariasi per kategori, butuh skema fleksibel | Bukan cuma di RDBMS -- akan menghasilkan banyak kolom NULL (hari_5_storage_strategy.md) |
 | Hasil query top produk & RFM | Redis (cache) | Diakses berulang, mahal di-generate ulang tiap kali, boleh sedikit basi (TTL 1 jam) | Bukan disimpan permanen di Redis -- source of truth tetap PostgreSQL/BigQuery |
 
-## Source of Truth & Sinkronisasi
+#### Source of Truth & Sinkronisasi
 `dim_product` ada di 2 tempat (PostgreSQL/BigQuery DAN MongoDB) -- PostgreSQL/BigQuery
 tetap jadi **source of truth** (dihasilkan pipeline utama, `build_star_schema.py`).
 MongoDB adalah proyeksi turunan yang diperkaya kategori, disinkronkan lewat
@@ -278,7 +278,7 @@ Isi lengkap dengan penjelasan bergaya `hari_5_storage_strategy.md` — jangan cu
 Section baru **"Project Journey"** di `README.md`:
 
 
-## Project Journey (8 Minggu)
+#### Project Journey (8 Minggu)
 
 | Minggu | Fokus | Yang Ditambahkan |
 |---|---|---|
@@ -295,7 +295,7 @@ Diagram arsitektur final (`diagrams/polyglot_architecture.png`) — gabungkan **
 
 Link ke tiap dokumen relevan: `GOVERNANCE.md` (Minggu 5), `STORAGE_STRATEGY.md` (Minggu 8), `cloud/setup_notes.md` (Minggu 6).
 
-### Struktur Repo (Final)
+#### Struktur Repo (Final)
 
 ```
 ecommerce-etl-pipeline/
@@ -346,7 +346,7 @@ ecommerce-etl-pipeline/
     └── polyglot_architecture.png     # baru
 ```
 
-### Kriteria "Selesai" untuk Minggu 8 (Capstone)
+#### Kriteria "Selesai" untuk Minggu 8 (Capstone)
 
 - [ ] `dim_product` termigrasi ke MongoDB dengan atribut fleksibel per kategori (heuristik kategori terdokumentasi jujur sebagai simplifikasi, bukan data asli)
 - [ ] Redis caching aktif untuk top 10 produk & RFM summary, dengan TTL yang masuk akal
