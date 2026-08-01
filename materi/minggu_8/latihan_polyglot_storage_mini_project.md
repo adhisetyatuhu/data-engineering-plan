@@ -227,7 +227,6 @@ python nosql/redis_cache_layer.py
 
 `nosql/benchmark_results.md` — catat angka **aktual** dari laptop kamu sendiri, plus 2-3 kalimat kesimpulan:
 
-```markdown
 # Benchmark: Query Langsung vs Redis Cache
 
 | Query | Cache MISS (query DB) | Cache HIT (dari Redis) | Speedup |
@@ -237,7 +236,6 @@ python nosql/redis_cache_layer.py
 
 ## Kesimpulan
 ...
-```
 
 **Catatan jujur soal skala** (konsisten dengan pola PySpark vs Pandas Minggu 3, BigQuery vs Postgres lokal Minggu 6): untuk data seukuran Online Retail II di `pg-belajar` lokal, query yang di-cache kemungkinan **sudah cukup cepat** bahkan tanpa cache (data muat nyaman, index dasar sudah membantu) — speedup dari Redis akan **terlihat jelas** secara relatif (cache hit hampir selalu jauh lebih cepat dari query database manapun, karena in-memory), tapi dampak absolutnya (berapa detik yang benar-benar dihemat) baru terasa signifikan di skala production dengan volume data & concurrent user yang jauh lebih besar — tulis observasi ini apa adanya di kesimpulan, jangan melebih-lebihkan dampak untuk skala mini project ini.
 
@@ -245,17 +243,16 @@ python nosql/redis_cache_layer.py
 
 Dokumen sintesis dari `hari_5_storage_strategy.md` — ini yang menyatukan **seluruh** keputusan arsitektur 8 minggu jadi 1 narasi koheren.
 
-**Ilustrasi referensi** untuk section "Diagram Polyglot Architecture" di bawah (bukan file yang perlu disimpan di tahap ini — diagram gabungan **final** `diagrams/polyglot_architecture.png` baru dibuat di Tahap 4, lihat catatan di bawah):
-
-![Diagram Polyglot Architecture](../../assets/images/minggu_8/polyglot_architecture.svg)
 
 # Storage Strategy — ecommerce-etl-pipeline
 
 ## Diagram Polyglot Architecture
 
-[Lihat ilustrasi referensi di atas. Alur: Raw data -> GCS (data lake) -> Spark
+![Diagram Polyglot Architecture](../../assets/images/minggu_8/polyglot_architecture.svg)
+
+Lihat ilustrasi referensi di atas. Alur: Raw data -> GCS (data lake) -> Spark
 transform -> bercabang ke PostgreSQL/BigQuery (source of truth analitik) & MongoDB
-(katalog fleksibel) -> query mahal (RFM, top produk) di-cache di Redis (TTL 1 jam).]
+(katalog fleksibel) -> query mahal (RFM, top produk) di-cache di Redis (TTL 1 jam).
 
 ## Tabel Keputusan
 
