@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 1010" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <style>
+    .title    { font-size: 22px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 14px; fill: #6B7280; }
+    .boxtitle { font-size: 14px; font-weight: 700; }
+    .boxtitle-sm { font-size: 13.5px; font-weight: 700; }
+    .boxsub   { font-size: 11px; }
+  </style>
+
+  <defs>
+    <marker id="arrow5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#374151"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1060" height="1010" fill="#FFFFFF"/>
+
+  <text x="530" y="28" text-anchor="middle" class="title">Lineage Diagram: online_retail_II.csv → Warehouse</text>
+  <text x="530" y="48" text-anchor="middle" class="subtitle">Ilustrasi — Minggu 5, Mini Project (Catalog &amp; Lineage)</text>
+
+  <!-- 1. Raw CSV -->
+  <rect x="360" y="90" width="340" height="50" rx="8" fill="#E5E7EB" stroke="#6B7280" stroke-width="2"/>
+  <text x="530" y="112" text-anchor="middle" class="boxtitle" fill="#1F2937">online_retail_II.csv</text>
+  <text x="530" y="130" text-anchor="middle" class="boxsub" fill="#1F2937">(raw)</text>
+
+  <line x1="530" y1="140" x2="530" y2="179" stroke="#374151" stroke-width="2" marker-end="url(#arrow5)"/>
+
+  <!-- 2. clean_transform.py -->
+  <rect x="250" y="180" width="560" height="80" rx="8" fill="#FDE68A" stroke="#D97706" stroke-width="2.5"/>
+  <text x="530" y="207" text-anchor="middle" class="boxtitle" fill="#78350F">clean_transform.py</text>
+  <text x="530" y="227" text-anchor="middle" class="boxsub" fill="#78350F">dropna Customer ID, dedup, filter Price&gt;0,</text>
+  <text x="530" y="244" text-anchor="middle" class="boxsub" fill="#78350F">hitung revenue &amp; is_return</text>
+
+  <line x1="530" y1="260" x2="530" y2="299" stroke="#374151" stroke-width="2" marker-end="url(#arrow5)"/>
+
+  <!-- 3. retail_clean -->
+  <rect x="360" y="300" width="340" height="50" rx="8" fill="#D1FAE5" stroke="#10B981" stroke-width="2"/>
+  <text x="530" y="322" text-anchor="middle" class="boxtitle" fill="#065F46">retail_clean</text>
+  <text x="530" y="340" text-anchor="middle" class="boxsub" fill="#065F46">(staging parquet)</text>
+
+  <line x1="530" y1="350" x2="530" y2="389" stroke="#374151" stroke-width="2" marker-end="url(#arrow5)"/>
+
+  <!-- 4. build_star_schema.py -->
+  <rect x="360" y="390" width="340" height="70" rx="8" fill="#FDE68A" stroke="#D97706" stroke-width="2.5"/>
+  <text x="530" y="417" text-anchor="middle" class="boxtitle" fill="#78350F">build_star_schema.py</text>
+  <text x="530" y="437" text-anchor="middle" class="boxsub" fill="#78350F">[split jadi fact + dimension]</text>
+
+  <!-- fan-out -->
+  <line x1="530" y1="460" x2="155" y2="499" stroke="#374151" stroke-width="2" marker-end="url(#arrow5)"/>
+  <line x1="530" y1="460" x2="405" y2="499" stroke="#374151" stroke-width="2" marker-end="url(#arrow5)"/>
+  <line x1="530" y1="460" x2="655" y2="499" stroke="#374151" stroke-width="2" marker-end="url(#arrow5)"/>
+  <line x1="530" y1="460" x2="905" y2="499" stroke="#374151" stroke-width="2" marker-end="url(#arrow5)"/>
+
+  <!-- 5a-d. dim_* / fact_sales parquet -->
+  <rect x="55" y="500" width="200" height="70" rx="8" fill="#D1FAE5" stroke="#10B981" stroke-width="2"/>
+  <text x="155" y="530" text-anchor="middle" class="boxtitle-sm" fill="#065F46">dim_customer</text>
+  <text x="155" y="549" text-anchor="middle" class="boxsub" fill="#065F46">(parquet)</text>
+
+  <rect x="305" y="500" width="200" height="70" rx="8" fill="#D1FAE5" stroke="#10B981" stroke-width="2"/>
+  <text x="405" y="530" text-anchor="middle" class="boxtitle-sm" fill="#065F46">dim_product</text>
+  <text x="405" y="549" text-anchor="middle" class="boxsub" fill="#065F46">(parquet)</text>
+
+  <rect x="555" y="500" width="200" height="70" rx="8" fill="#D1FAE5" stroke="#10B981" stroke-width="2"/>
+  <text x="655" y="530" text-anchor="middle" class="boxtitle-sm" fill="#065F46">dim_date</text>
+  <text x="655" y="549" text-anchor="middle" class="boxsub" fill="#065F46">(parquet)</text>
+
+  <rect x="805" y="500" width="200" height="70" rx="8" fill="#D1FAE5" stroke="#10B981" stroke-width="2"/>
+  <text x="905" y="530" text-anchor="middle" class="boxtitle-sm" fill="#065F46">fact_sales</text>
+  <text x="905" y="549" text-anchor="middle" class="boxsub" fill="#065F46">(parquet)</text>
+
+  <!-- fan-in -->
+  <line x1="155" y1="570" x2="530" y2="609" stroke="#374151" stroke-width="2" marker-end="url(#arrow5)"/>
+  <line x1="405" y1="570" x2="530" y2="609" stroke="#374151" stroke-width="2" marker-end="url(#arrow5)"/>
+  <line x1="655" y1="570" x2="530" y2="609" stroke="#374151" stroke-width="2" marker-end="url(#arrow5)"/>
+  <line x1="905" y1="570" x2="530" y2="609" stroke="#374151" stroke-width="2" marker-end="url(#arrow5)"/>
+
+  <!-- 6. load_to_warehouse -->
+  <rect x="360" y="610" width="340" height="60" rx="8" fill="#FDE68A" stroke="#D97706" stroke-width="2.5"/>
+  <text x="530" y="637" text-anchor="middle" class="boxtitle" fill="#78350F">load_to_warehouse</text>
+  <text x="530" y="655" text-anchor="middle" class="boxsub" fill="#78350F">(Airflow)</text>
+
+  <line x1="530" y1="670" x2="530" y2="709" stroke="#374151" stroke-width="2" marker-end="url(#arrow5)"/>
+
+  <!-- 7. Postgres -->
+  <rect x="360" y="710" width="340" height="60" rx="8" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2.5"/>
+  <text x="530" y="737" text-anchor="middle" class="boxtitle" fill="#1E3A8A">Postgres</text>
+  <text x="530" y="755" text-anchor="middle" class="boxsub" fill="#1E3A8A">(dim_*, fact_sales)</text>
+
+  <line x1="530" y1="770" x2="530" y2="809" stroke="#374151" stroke-width="2" marker-end="url(#arrow5)"/>
+
+  <!-- 8. data_quality_check -->
+  <rect x="360" y="810" width="340" height="60" rx="8" fill="#CFFAFE" stroke="#0891B2" stroke-width="2.5"/>
+  <text x="530" y="837" text-anchor="middle" class="boxtitle" fill="#164E63">data_quality_check</text>
+  <text x="530" y="855" text-anchor="middle" class="boxsub" fill="#164E63">(Great Expectations)</text>
+
+  <line x1="530" y1="870" x2="530" y2="908" stroke="#374151" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow5)"/>
+
+  <!-- 9. streaming-demo (opsional) -->
+  <rect x="310" y="910" width="440" height="80" rx="8" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="2" stroke-dasharray="7 4"/>
+  <text x="530" y="940" text-anchor="middle" class="boxtitle" fill="#4C1D95">streaming-demo/producer.py</text>
+  <text x="530" y="958" text-anchor="middle" class="boxsub" fill="#4C1D95">(opsional — dari fact_sales)</text>
+  <text x="530" y="975" text-anchor="middle" class="boxsub" fill="#4C1D95">fact_sales -&gt; Kafka -&gt; consumer.py</text>
+</svg>

@@ -106,50 +106,34 @@ Untuk **tiap** tabel (`fact_sales`, `dim_customer`, `dim_product`, `dim_date`) d
 
 ### Tahap 2: Lineage Diagram (±1.5 jam)
 
-Sesuai `hari_3_data_lineage.md`, buat **table-level lineage diagram** manual (draw.io/dbdiagram.io), simpan sebagai `governance/lineage_diagram.png` dan `diagrams/data_lineage.png` (boleh file yang sama, direferensikan dari 2 tempat):
+Sesuai `hari_3_data_lineage.md`, buat **table-level lineage diagram** manual (draw.io/dbdiagram.io), simpan sebagai `governance/lineage_diagram.png` dan `diagrams/data_lineage.png` (boleh file yang sama, direferensikan dari 2 tempat). Ilustrasi referensi:
 
-```
-online_retail_II.csv (raw)
-        |
-        v
-clean_transform.py  --[dropna Customer ID, dedup, filter Price>0, hitung revenue & is_return]
-        |
-        v
-retail_clean (staging parquet)
-        |
-        v
-build_star_schema.py  --[split jadi fact + dimension]
-        |
-        +--> dim_customer (parquet) --+
-        +--> dim_product (parquet)  --+
-        +--> dim_date (parquet)     --+--> load_to_warehouse (Airflow) --> Postgres (dim_*, fact_sales)
-        +--> fact_sales (parquet)   --+                                          |
-                                                                                   v
-                                                                    data_quality_check (Great Expectations)
-                                                                                   |
-                                                                                   v
-                                                                    streaming-demo/producer.py (opsional,
-                                                                    dari fact_sales -> Kafka -> consumer.py)
-```
+![Lineage Diagram: online_retail_II.csv → Warehouse](../../assets/images/minggu_5/lineage_diagram.svg)
 
 **Opsional (bonus, tidak wajib)**: kalau ingin coba lineage **otomatis**, integrasikan [OpenLineage](https://openlineage.io/) dengan Airflow (`apache-airflow-providers-openlineage`) — begitu terpasang, tiap run DAG otomatis memancarkan event lineage ke OpenMetadata/Marquez tanpa perlu digambar manual. Ini di luar cakupan wajib mini project (setup tambahan cukup signifikan), tapi baik diketahui ada sebagai opsi produksi yang lebih robust dibanding diagram statis — dibahas konsepnya di `hari_3_data_lineage.md`.
 
 ### Tahap 3: Tulis `GOVERNANCE.md` (±2 jam)
 
-```markdown
-# Data Governance — ecommerce-etl-pipeline
+Buat `governance/GOVERNANCE.md` dengan judul `# Data Governance — ecommerce-etl-pipeline`, diikuti 4 bagian berikut:
 
+**1. Data Ownership**
+
+```markdown
 ## Data Ownership
 
-| Dataset | Owner | Steward | Custodian |
-|---|---|---|---|
-| fact_sales | Data Engineering Team | (kamu) | Platform Team (hipotetis) |
-| dim_customer | Data Engineering Team | (kamu) | Platform Team (hipotetis) |
-| dim_product | Data Engineering Team | (kamu) | Platform Team (hipotetis) |
-| dim_date | Data Engineering Team | (kamu) | Platform Team (hipotetis) |
+| Dataset      | Owner                 | Steward | Custodian                 |
+|--------------|-----------------------|---------|---------------------------|
+| fact_sales   | Data Engineering Team | (kamu)  | Platform Team (hipotetis) |
+| dim_customer | Data Engineering Team | (kamu)  | Platform Team (hipotetis) |
+| dim_product  | Data Engineering Team | (kamu)  | Platform Team (hipotetis) |
+| dim_date     | Data Engineering Team | (kamu)  | Platform Team (hipotetis) |
 
 Lihat `materi/minggu_5/hari_4_stewardship_quality_governance.md` untuk definisi tiap peran.
+```
 
+**2. Data Quality Policy**
+
+```markdown
 ## Data Quality Policy
 
 Semua data yang masuk `fact_sales` harus lolos `great_expectations/expectations/ecommerce_suite.json`
@@ -162,21 +146,31 @@ sebelum di-load ke warehouse (fail-fast, lihat `dags/ecommerce_etl_dag.py`). Rin
 
 Proses eskalasi kalau check gagal: lihat `materi/minggu_5/hari_4_stewardship_quality_governance.md`
 bagian "Proses Eskalasi".
+```
 
+**3. PII Handling Policy**
+
+```markdown
 ## PII Handling Policy
 
 Kolom PII yang teridentifikasi (tag `PII` di OpenMetadata, lihat `governance/`):
+
 - `customer_id` (direct identifier)
-- `country` dikombinasikan dengan pola transaksi (quasi-identifier) -- lihat
+- `country` dikombinasikan dengan pola transaksi (quasi-identifier) — lihat
   `materi/minggu_5/hari_5_compliance_privacy.md`
 
 Aturan:
+
 - `customer_id` di-**pseudonymize** (hash + salt tersimpan terpisah) untuk data yang diekspor
   ke tim di luar Data Engineering (mis. tim data science eksternal)
 - Tidak ada ekspor data mentah (raw) ke pihak eksternal tanpa proses masking/anonymization
 - Retensi: data mentah (`data/raw/`) disimpan maksimal 2 tahun (kebijakan hipotetis, sesuaikan
   dengan kebutuhan bisnis/regulasi sungguhan)
+```
 
+**4. Access Policy (Hipotetis)**
+
+```markdown
 ## Access Policy (Hipotetis)
 
 | Role | fact_sales/dim_* (agregat) | customer_id asli | Raw data |
